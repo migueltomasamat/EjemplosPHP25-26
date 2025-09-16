@@ -1,0 +1,18 @@
+#Servicios a instalar
+
+services:
+  # Apache + PHP
+  proyecto1php:
+    image: php:8.4-apache
+
+    #Crear un volumen para almacenar mi página web
+    volumes:
+      - .:/var/www/html
+      - .docker/apache/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
+      - .docker/php/php.ini-development:/usr/local/etc/php/php.ini-development
+
+    ports:
+      - 8080:80
+
+    expose:
+      - 80
