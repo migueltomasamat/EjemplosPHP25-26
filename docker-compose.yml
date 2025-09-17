@@ -3,7 +3,10 @@
 services:
   # Apache + PHP
   proyecto1php:
-    image: php:8.4-apache
+    build:
+      context: ./.docker
+      dockerfile: Dockerfile
+    container_name: containerphp
 
     #Crear un volumen para almacenar mi página web
     volumes:
@@ -13,6 +16,44 @@ services:
 
     ports:
       - 8080:80
-
     expose:
       - 80
+    networks:
+      - proyecto1
+    links:
+      - mariadb
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  mariadb:
+    image: mariadb:latest
+    volumes:
+      - .docker/mariadb:/var/lib/mysql:Z
+    ports:
+      - 3307:3306
+    networks:
+      - proyecto1
+    environment:
+      MARIADB_ROOT_PASSWORD: toor
+      MARIADB_DATABASE: proyecto1
+      MARIADB_USER: miguel
+      MARIADB_PASSWORD: leugim
+    command:
+      --default-authentication-plugin=mysql_native_password
+
+  mongo:
+    image: mongo
+    restart: on-failure
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    networks:
+      - proyecto1
+    ports:
+      - 27018:27017
+
+networks:
+  proyecto1:
+    name: proyecto1
+    driver: bridge
+
