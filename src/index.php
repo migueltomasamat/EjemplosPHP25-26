@@ -7,7 +7,7 @@
 
 
     <ol>
-        <li><a href="/ejercicios/bucle.php">Creación de un bucle en php</li>
+        <li><a href="/src/ejercicios/bucle.php">Creación de un bucle en php</li>
     </ol>
 <body>
 
