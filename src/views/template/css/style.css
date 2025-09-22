@@ -1,0 +1,335 @@
+*{
+    font-family: 'Poppins', sans-serif; /* Tipografía de letra de toda la página */
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: black; /* Color del fondo negro */
+    color: white; /* Color de las letras blanco */
+}
+/* --------------------------------EMPEZAMOS CON EL HEADER----------------------------------------------------------- */
+.header{
+    width: 100%;
+    height: 100vh; /* Utilizo vh para que sea una página más responsive */
+    /* Añadimos la imagen pero con un poco de transparencia. Normalmente linear-gradient se usa para ir de un color
+    a otro (de arriba a abajo si se deja por defecto) y hacer una transición. Aquí usamos rgba que es como el código
+    de color rgb, pero la "a" (alpha) es la opacidad que va de 1 (opaco) a 0 (transparente). Con esto hago que la
+    imagen sea un poco transparente y más oscura, ya que en rgb (0,0,0) significa negro */
+    position: relative;
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0, 0, 0, 0.6)), url(/img/index/header.jpg);
+    background-size: cover; /* Hace que se guarde la escala que tiene por defecto la imagen y su relación aspecto intrínseca */
+    background-position: center; /* Centramos la imagen */
+    padding: 10px 8%; /* Para arriba y abajo 10px y para derecha e izquierda 8% */
+}
+nav{
+    display: flex; /* Hago que el contenido del nav sea horizontal en vez de vertical ajustándolas */
+    align-items: center; /* El contenido de las flexbox se centra */
+    /* El logo pasa a estar a la izquierda y los botones a la derecha porque hay un espacio entre ellos, ya que el logo
+    es un elemento y los botones como están en el mismo div, son otro elemento conjunto*/
+    justify-content: space-between;
+    padding: 10px 0; /* Para arriba y abajo 10px y para derecha e izquierda 0% */
+}
+.logo{
+    width: 150px;
+    cursor: pointer; /* El ratón se vuelve una mano indicando que al pinchar en el logo te lleva a un link */
+}
+nav button{
+    border: 0;
+    outline: 0;
+    background: rgb(219, 0, 1); /* Color de los botones */
+    color: white; /* Color de la letra los botones */
+    font-size: 12px; /* Tamaño de letra de los botones */
+    font-weight: bold;
+    border-radius: 4px; /* Redondea las esquinas para que sean cuadrados redondeados */
+    padding: 7px 20px;
+    margin-left: 8px; /* Hacemos que haya un espacio entre los botones */
+    cursor: pointer;
+}
+.idioma{
+    display: inline-flex; /* Hace que se alineen los elementos (verticalmente) del botón a la misma altura en el centro */
+    align-items: center; /* Alineamos horizontalmente el texto y la imagen en el centro del botón */
+    background: transparent; /* Hacemos que no tenga color el botón y que por defecto sea negro como el fondo */
+    border: 1px solid white; /* Ahora el botón aunque es transparente tiene un borde blanco que lo delimita */
+    padding: 7px 10px;
+}
+.idioma img{ /* Ahora ajustamos la imagen del botón de idioma */
+    width: 10px;
+    margin-left: 10px;
+}
+.contenido-headder{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Hace que se quede en medio ya que contrasta el top 50% y el left 50% */
+    text-align: center;
+    margin-top: 100px;
+}
+.contenido-headder h1{
+    font-size: 60px;
+    font-weight: 600;
+    max-width: 650px; /* Hace que la letra no pueda ser más ancha que el valor establecido: 650px */
+    line-height: 70px; /* Establece la distancia de los otros textos */
+}
+.contenido-headder h3 {
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+.entrada-mail{
+    background: white;
+    display: flex; /* Para el diseño responsive */
+    border-radius: 4px;
+    align-items: center;
+    margin-top: 30px;
+    overflow: hidden; /* Cuando escribes el mail y es muy largo, te deja seguir escribiendo pero dejas de ver las primeras letras a medida que escribes */
+}
+.entrada-mail input{
+    flex: 1; /* Esto hace que crezca a medida que se amplia la ventana, es para el diseño responsive */
+    border: 0;
+    outline: 0;
+    margin-left: 20px;
+}
+.entrada-mail button {
+    background-color: rgb(219, 0, 1);
+    border: 0;
+    outline: 0;
+    color: white;
+    font-size: 16px;
+    padding: 15px 30px; /* Centramos el texto */
+    cursor: pointer;
+}
+/* ---------------------------EMPEZAMOS CON LOS ELEMENTOS DEL BODY---------------------------------------------------- */
+.elementos{
+    padding: 50px 12%;
+    font-size: 22px;
+}
+.fila{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    /* Poniendo esto, si los elementos no caben en la anchura del contenedor,
+        se creará una nueva línea automáticamente y se continuará colocando los
+        elementos en ella. Sin esta propiedad, los elementos se ajustarían a una
+        sola línea y se reducirían automáticamente para caber en el contenedor. */
+    flex-wrap: wrap;
+    padding: 50px 0;
+}
+.columna-texto{
+    flex-basis: 50%; /* En el flexbox establece el tamaño del contenido según la pantalla */
+    margin-bottom: 20px;
+}
+.columna-imagen{
+    flex-basis: 50%;
+    margin-bottom: 20px;
+}
+.columna-imagen img{
+    display: block; /* La imagen ahora tiene un cuadro de bloque */
+    height: auto;
+    width: 90%;
+    margin: auto;
+}
+.elementos h2{
+    font-size: 50px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Se usa sobre la imagen 4 que es más grande que las otras, y se hace la selección
+    del atributo "alt" entre corchetes */
+img[alt="imagen4"]{
+    width: 70%;
+    max-width: 400px;
+}
+
+/* -------------------------------------EMPEZAMOS CON LAS FAQ Y LA INFORMACIÓN -------------------------------- */
+.faq{
+    padding: 10px 12%;
+    text-align: center;
+    font-size: 18px;
+}
+.faq h2{
+    font-weight: 500;
+    font-size: 40px;
+}
+.acordeon {
+    margin: 60px auto;
+    width: 100%;
+    max-width: 750px;
+}
+
+.acordeon li {
+    list-style: none;
+    /* Así definimos que la lista no tiene propiedades o parámetros a definir */
+    width: 100%;
+    padding: 5px;
+}
+
+.acordeon li label {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: 500;
+    background: #303030;
+    margin-bottom: 2px;
+    cursor: pointer;
+    position: relative;
+}
+
+label::after {
+    /* Añadimos este pseudo elemento para crear el + a la derecha de todos los botones */
+    content: '+';
+    /* Aquí ponemos lo que añadimos */
+    font-size: 34px;
+    /* La letra que utilizamos */
+    position: absolute;
+    right: 25px;
+    /* Hacia donde está colocada */
+    /* Aquí añadimos una transición para que cuando seleccionemos la caja, el símbolo + cambie en 0.5 segundos y no de golpe */
+    transition: transform 0.5s;
+}
+
+input[type="radio"] {
+    /* Seleccionamos los botones tipo radio de nuestras faq */
+    display: none;
+    /* Los ocultamos */
+}
+
+.acordeon .contenido{
+    background: #303030;
+    text-align: left;
+    padding: 0 20px;
+    max-height: 0; /* Si ponemos esto, estará oculto ya que no tendrá altura para enseñarse */
+    overflow: hidden;
+    /* Poniendo esto, hacemos que la transición entre hacer click en una de las preguntas y otra, lleve los segundos
+    que escribimos (0.3) y no se haga de forma brusca, haciendo una pequeña transición */
+    transition: max-height 0.5s, padding 0.5s;
+}
+/* Ahora vamos a seleccionar el botón radio que habíamos escondido, añadimos la pseudoclase (:checked)
+   que especifica el estado especial en el que se encuentra el elemento (cuando hacemos click en el botón)
+    y añadimos "+ label + .contenido" entre símbolos + (son combinadores de hermanos adyacentes) que indican que
+    solo ocurre cuando el elemento del botón va inmediatamente antes de una etiqueta label y de una clase
+    contenido. Si coinciden todas esas condiciones se aplican las siguientes condiciones css:*/
+.acordeon input[type="radio"]:checked + label + .contenido{
+    max-height: 800px;
+    padding: 30px 30px;
+}
+/* Ahora, seleccionamos lo mismo pero con la condición que después de que esté con el check, es decir, si y solo si
+   está con el check sucede lo siguiente: */
+.acordeon input[type="radio"]:checked+label::after{
+    transform: rotate(135deg); /* Hacemos que el símbolo + rote 135 grados al pulsar en una de las preguntas. Se convierte en una x */
+}
+.faq .entrada-mail{
+    max-width: 600px;
+    margin: 20px auto 60px;
+}
+.faq small{
+    font-size: 13px;
+}
+/* --------------------------------FOOTER--------------------------------------------------------- */
+.footer{
+    padding: 50px 15% 10px;
+    border-top: 6px solid #333;
+    color: #777;
+}
+.footer h2{
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+.footer .columna{
+    flex-basis: 25%; /* Determinamos el tamaño de la caja de contenidos en un 25% cada columna, haciendo que se pongan de forma horizontal repartiéndose entre las cuatro el espacio */
+    flex-grow: 1;
+    margin-bottom: 20px;
+    padding: 0px 15px;
+}
+.footer .columna a{
+    display: block;
+    text-decoration: none;
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.footer .columna a:hover {
+    text-decoration: underline;
+}
+.footer .fila{
+    align-items: flex-start; /* Así todos los elementos empiezan desde el mismo punto y no están centrados en su propia flexbox */
+    padding: 10px 0;
+}
+.footer .idioma{
+    color: white;
+    padding: 10px 20px;
+    border-radius: 3px;
+}
+.texto-copyright{
+    font-size: 14px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+/* -----------------------ARREGLOS DE CSS PARA PANTALLAS PEQUEÑAS--------------------------------------------------------------- */
+/* Esto es para las pantallas que sean menores de 600px */
+@media only screen and (max-width:600px){
+    /* -----------------------ARREGLOS DEL HEADER--------------------------------------- */
+    .logo{
+        width: 100px;
+    }
+    nav button{
+        padding: 5px 10px;
+    }
+    nav .idioma{
+        padding: 4px 8px;
+    }
+    .contenido-headder{
+        position: unset;
+        transform: none;
+        padding-top: 150px;
+    }
+    .contenido-headder h1{
+        font-size: 30px;
+    }
+    .entrada-mail button{
+        font-size: 12px;
+        padding: 10px 15px;
+    }
+    /* -------------------------ARREGLOS PARA LOS ELEMENTOS--------------------------------- */
+    .columna-texto, .columna-imgagen{
+        flex-basis: 100%;
+    }
+    .elementos h2{
+        font-size: 30px;
+    }
+    .elementos p{
+        font-size: 15px;
+    }
+    /* Seleccionamos los elementos que van dentro de la etiqueta con clase "fila" con su pseudoclase 
+        de css ":nth child()" las posiciones 2 y 4, es decir, las etiquetas div con clase "fila" pares
+        (hay solo 4 div con clase "fila")  */
+    .fila:nth-child(2),.fila:nth-child(4){
+        /* Como estamos tratando a las etiquetas div con clase "fila" como flexbox, usando la propiedad
+        flex-direction, elegimos cómo sus elementos se posicionan. Con "column-reverse" lo que hacemos es
+        que el elemento inicial (<div class="columna-imagen">) sea el elemento final ahora, y que el elemento
+        final anterior (<div class="columna-texto">) sea el elemento inicial. Esto lo hacemos para que al 
+        hacer scroll en una pantalla pequeña, siempre se vea primero el texto y luego la imagen, si no lo 
+        pusiéramos, los elementos se verían: texto, imagen, imagen, texto, texto, imagen, imagen, texto.
+        Y ahora se ven: texto, imagen, texto, imagen, texto, imagen, texto, imagen */
+        flex-direction: column-reverse;
+    }
+    .elementos .fila{
+        padding: 10px 0;
+    }
+    /* -----------------------------------ARREGLOS PARA FAQ E INFORMACIÓN------------------------------ */
+    .faq h2{
+        font-size: 20px;
+    }
+    .acordeon .contenido{
+        font-size: 14px;
+    }
+    .acordeon li label{
+        padding: 10px;
+        font-size: 14px;
+    }
+    label::after{
+        font-size: 22px;
+    }
+}

@@ -1,0 +1,356 @@
+* {
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+body {
+  background: white;
+  color: black;
+}
+
+/* --------------------------PRIMER HEADER------------------------- */
+
+.header {
+  width: 100%;
+  height: 10vh;
+  background-color: black;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  padding: 5px 4%;
+}
+
+.centro-ayuda {
+  display: flex;
+  align-items: center;
+  padding: 0px;
+}
+
+.logo {
+  padding: 0px 10px;
+  width: 150px;
+  cursor: pointer;
+}
+
+.centro-ayuda p {
+  font-size: 20px;
+  color: white;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.subscripcion {
+  display: inline-flex;
+  align-items: center;
+  background: transparent;
+  border: 1px solid white;
+  padding: 7px 10px;
+}
+
+/* ---------------------------SEGUNDO HEADER----------------------------------------- */
+
+.header-dos {
+  width: 100%;
+  height: 10vh;
+  background-color: white;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  padding: 15px 4%;
+}
+
+p {
+  color: #e50914;
+  font-size: 15px;
+  font-weight: 500;
+  transition: transform 0.5s;
+}
+
+em:hover {
+  text-decoration: none;
+}
+
+a p:hover {
+  text-decoration: underline;
+  transform: translateX(-10px);
+}
+
+em {
+  font-size: 20px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+nav button {
+  border: 0;
+  outline: 0;
+  background: #e50914;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 4px;
+  padding: 7px 20px;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.imprimir {
+  display: inline-flex;
+  align-items: center;
+  font-size: 15px;
+  background: transparent;
+  color: black;
+  border: 1px solid black;
+  padding: 7px 10px 7px 3px;
+}
+
+.imprimir img {
+  width: 30px;
+}
+
+/* -----------------------BODY TEXTO------------------------- */
+.texto {
+  padding: 5px 4%;
+  text-align: justify;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.texto h1 {
+  font-size: 40px;
+  font-weight: 750;
+  max-width: 650px;
+  line-height: 50px;
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+
+.texto p {
+  font-size: 17px;
+  font-weight: 350;
+  color: #221f1f;
+  margin-bottom: 40px;
+}
+
+.texto .conjunto{
+  font-size: 17px;
+}
+
+h2{
+  font-size: 20px;
+  margin-bottom: -2%;
+}
+
+a{
+  color: #e50914;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+a:hover{
+  text-decoration: underline;
+}
+
+ul{
+  padding-left: 6%;
+  /* Esto hace que el marker de la etiqueta ul en vez de estar por defecto como "outside" y todo el texto tenga
+    sangría desde el marker; que solo la primera línea tenga esa sangría y las demás no, por lo que están a la
+    misma altura que el marker */
+  list-style-position: inside;
+}
+
+.lista {
+  margin-top: -2%;
+  font-size: 17px;
+}
+
+.lista h3{
+  font-size: 17px;
+  /* Ponemos esto para que no se haga un salto de línea con el elemento h3. Si ponemos en CSS la etiqueta
+    h3 seguida de la etiqueta p en una etiqueta li global: <li><h3>...</h3><p>...</p></li> Seguirá haciendo 
+    un salto de línea, pero si quitamos la etiqueta p, ya no; el texto será continuado sin salto de línea  */
+  display: inline-block;
+  font-weight: 600;
+}
+
+.lista li{
+  margin-bottom: 3%;
+  margin-top: -1%;
+}
+
+.lista2{
+  margin-top: 2%;
+}
+
+.uno, .dos, .tres, .cuatro, .cinco, .seis, .siete, .ocho, .nueve, .diez, .once{
+  margin-bottom: 4%;
+}
+
+.texto .tres ul li{
+  margin-bottom: 2%;
+}
+
+.texto h4 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #221f1f;
+  margin-bottom: 50px;
+  margin-top: -20px;
+}
+
+/* -----------------------------------FOOTER------------------------- */
+.footer {
+  padding: 50px 6% 80px;
+  background-color: black;
+  color: #777;
+}
+
+.footer .idioma {
+  display: inline-flex;
+  align-items: center;
+  color: #777;
+  font-size: 20px;
+  background-color: black;
+  padding: 10px 20px;
+  border: solid 1px #777;
+  border-radius: 3px;
+}
+
+.idioma img {
+  width: 10px;
+  margin-left: 80px;
+  opacity: 0.5;
+}
+
+.footer .fila a {
+  display: inline;
+  text-decoration: none;
+  color: #777;
+  font-size: 14px;
+  margin-bottom: 10px;
+  flex-basis: 40%;
+  flex-grow: 1;
+  margin-bottom: 20px;
+  padding-left: 23px;
+}
+
+.footer .fila a:hover {
+  text-decoration: underline;
+}
+
+/* -----------------------ARREGLOS DE CSS PARA PANTALLAS PEQUEÑAS--------------------------------------------------------------- */
+/* Esto es para las pantallas que sean menores de 600px */
+@media only screen and (max-width: 600px) {
+  /* -----------------------ARREGLOS DEL HEADER 1--------------------------------------- */
+  .header {
+    width: 100%;
+    height: 9vh;
+  }
+
+  .logo {
+    width: 80px;
+    margin-left: 15px;
+  }
+
+  .centro-ayuda p {
+    margin-top: 0.1px;
+    font-size: 15px;
+  }
+
+  nav button {
+    visibility: hidden;
+    display: none;
+    font-size: 0;
+    padding: 0;
+  }
+  .subscripcion {
+    display: none;
+  }
+  /* -----------------------ARREGLOS DEL HEADER 2--------------------------------------- */
+  p {
+    font-size: 12px;
+    margin-top: -10px;
+    padding-left: 4px;
+  }
+  .imprimir {
+    display: none;
+  }
+  /* -----------------------ARREGLOS DEL BODY CON INFO--------------------------------------- */
+  .texto {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .texto h1 {
+    font-size: 30px;
+    font-weight: 700;
+    text-align: left;
+    margin-bottom: 20px;
+    margin-top: -10px;
+  }
+
+  .texto p {
+    font-size: 17px;
+    margin-bottom: 30px;
+  }
+  
+  h2 {
+    margin-bottom: -1%;
+  }
+
+  ul{
+    margin-bottom: 10%;
+    margin-top: -3%;
+  }
+  
+  .lista {      
+    margin-top: 2%;
+  }
+  
+  .lista li {
+    margin-top: 5%;
+  }
+
+  .lista2 ul li:nth-child(1){
+    margin-top: 10%;
+  }
+  
+  .uno, .dos, .tres, .cuatro, .cinco, .seis, .siete, .ocho, .nueve, .diez, .once {
+    margin-bottom: 10%;
+  }
+
+  .texto h3{
+    display: inline;
+  }
+
+  .siete .lista h3 + p{
+    margin-top: 3%;
+  }
+
+  .texto h4 {
+    font-size: 15px;
+    margin-top: -10px;
+  }
+  /* -----------------------ARREGLOS DEL FOOTER--------------------------------------- */
+  .footer {
+    padding: 20px 2% 50px;
+  }
+
+  .footer .idioma {
+    display: none;
+  }
+
+  .footer .fila a {
+    display: flex;
+    text-align: center;
+    margin-left: 30px;
+  }
+}
