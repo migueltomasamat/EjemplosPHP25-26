@@ -1,14 +1,33 @@
-<html>
-<head>
-       <title>Índice de ejercicios</title>
-</head>
-<body>
-    <h1>Ejercicios de DWES</h1>
+<?php
+include_once "vendor/autoload.php";
+include_once "env.php";
+
+//Directiva para inserta o utilizar la clase RouteCollector
+use Phroute\Phroute\RouteCollector;
+
+//instancia una variable de la clase RouteCollector
+$router = new RouteCollector();
+
+//Definir las rutas de mi aplicación
+
+$router->get('/',function(){
+    return 'Estoy en la página principal';
+});
+
+$router->get('/administrador',function(){
+    include_once DIRECTORIO_VISTAS_ADMINISTRACION."welcome.php";
+});
+$router->get('/login',function(){
+    include_once DIRECTORIO_VISTAS."indice.php";
+});
 
 
-    <ol>
-        <li><a href="/src/ejercicios/bucle.php">Creación de un bucle en php</li>
-    </ol>
-<body>
 
-</html>
+
+//Resolver la ruta que debemos cargar
+$dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
+
+$response = $dispatcher->dispatch($_SERVER['REQUEST_METHOD'], parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+
+// Print out the value returned from the dispatched function
+echo $response;

@@ -14,6 +14,7 @@
     ],
     "require": {
         "ramsey/uuid": "^4.9",
-        "nesbot/carbon": "^3.10"
+        "nesbot/carbon": "^3.10",
+        "phroute/phroute": "^2.2"
     }
 }

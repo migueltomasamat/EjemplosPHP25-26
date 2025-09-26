@@ -8,6 +8,8 @@ services:
       dockerfile: Dockerfile
     container_name: containerphp
 
+    #user: 1000:1000
+
     #Crear un volumen para almacenar mi página web
     volumes:
       - ./src:/var/www/html
