@@ -21,13 +21,25 @@ $router->get('/login',function(){
     include_once DIRECTORIO_VISTAS."indice.php";
 });
 
+$router->get('/pass', function () {
+    echo "Se va a generar una contraña";
+    include_once "auxiliar/funciones.php";
+
+    echo generatePassword(16);
+});
+
 
 
 
 //Resolver la ruta que debemos cargar
 $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
 
-$response = $dispatcher->dispatch($_SERVER['REQUEST_METHOD'], parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+try{
+    $response = $dispatcher->dispatch($_SERVER['REQUEST_METHOD'], parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+
+}catch (HttpRouteNotFoundException $e){
+    include_once "views/404.html";
+}
 
 // Print out the value returned from the dispatched function
 echo $response;

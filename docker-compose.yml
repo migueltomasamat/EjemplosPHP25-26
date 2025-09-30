@@ -77,7 +77,7 @@ services:
     networks:
       - proyecto1
     volumes:
-      - .docker/openldap_data:/bitnami/openldap
+      - .docker/openldap_data:/bitnami/openldap/data
 
 
 networks:
