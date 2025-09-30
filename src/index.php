@@ -3,6 +3,7 @@ include_once "vendor/autoload.php";
 include_once "env.php";
 
 //Directiva para inserta o utilizar la clase RouteCollector
+use Phroute\Phroute\Exception\HttpRouteNotFoundException;
 use Phroute\Phroute\RouteCollector;
 
 //instancia una variable de la clase RouteCollector
