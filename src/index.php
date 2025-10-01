@@ -23,10 +23,18 @@ $router->get('/login',function(){
 });
 
 $router->get('/pass', function () {
-    echo "Se va a generar una contraña";
+    echo "Se va a generar una contraña</br>";
+    var_dump($_GET);
+
     include_once "auxiliar/funciones.php";
 
-    echo generatePassword(16);
+    if (isset($_GET['num1'])){
+        echo generatePassword($_GET['num1']);
+    }else{
+        echo "Tienes que pasarme un parámetro llamado num1";
+    }
+
+
 });
 
 
