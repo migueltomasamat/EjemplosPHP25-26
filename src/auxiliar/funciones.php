@@ -5,6 +5,9 @@ declare(strict_types=1);
 const SOLO_NUMEROS = 1;
 const NUMEROS_LETRAS =2;
 
+const ARRAY_LETRAS_DNI = ['T','R','W','A','G','M','Y','F','P','D','X',
+    'B','N','J','Z','S','Q','V','H','L','C','K','E'];
+
     function generatePassword(int $caracteres,int $condiciones=NUMEROS_LETRAS):string|int|null{
 
         return "Tu contraseña de $caracteres caracteres es:";
@@ -22,3 +25,8 @@ const NUMEROS_LETRAS =2;
     ejemploParametrosVariables(15,266,"HOLA");
     ejemploParametros("Hola");
     generatePassword(16,NUMEROS_LETRAS);
+
+    function calcularLetraDNI (int $numero):?string{
+        $letra = $numero%23;
+        return ARRAY_LETRAS_DNI[$letra];
+    }
