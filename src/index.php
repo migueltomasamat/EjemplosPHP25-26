@@ -42,6 +42,22 @@ $router->get('/calculodni',function(){
 
 });
 
+
+$router->get('/administrador/add-pelicula',function(){
+    include_once "admin/views/add-pelicula.php";
+
+
+});
+
+$router->post('/pelicula',function(){
+    var_dump($_POST);
+    var_dump($_FILES);
+    mkdir(__DIR__."/uploaded");
+    move_uploaded_file($_FILES['poster']['tmp_name'],__DIR__."/uploaded/"."fichero.png");
+    #echo json_encode($_POST);
+
+});
+
 $router->get('/pass', function () {
     echo "Se va a generar una contraña</br>";
     var_dump($_GET);
