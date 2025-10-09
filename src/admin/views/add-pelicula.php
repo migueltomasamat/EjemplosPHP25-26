@@ -30,19 +30,19 @@ include_once("template/main.php");
         <fieldset name="idomas">
             <legend>Lenguajes Disponibles</legend>
             <div class="form-check">
-                <input class="form-check-input" name="idiomas" type="checkbox" value="español" id="checkEspañol">
+                <input class="form-check-input" name="idiomas[]" type="checkbox" value="español" id="checkEspañol">
                 <label class="form-check-label" for="checkEspañol">
                     Español
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" name="idiomas" type="checkbox" value="ingles" id="checkIngles" checked>
+                <input class="form-check-input" name="idiomas[]" type="checkbox" value="ingles" id="checkIngles" checked>
                 <label class="form-check-label" for="checkIngles">
                     Ingles
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" name="idiomas" type="checkbox" value="frances" id="checkDefault">
+                <input class="form-check-input" name="idiomas[]" type="checkbox" value="frances" id="checkDefault">
                 <label class="form-check-label" for="checkFrances">
                     Frances
                 </label>

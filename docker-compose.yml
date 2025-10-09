@@ -8,7 +8,7 @@ services:
       dockerfile: Dockerfile
     container_name: containerphp
 
-    user: matomas:matomas
+    user: miguel:miguel
 
     #Crear un volumen para almacenar mi página web
     volumes:
@@ -64,20 +64,20 @@ services:
     networks:
       - proyecto1
 
-  openldap:
-    image: bitnami/openldap:latest
-    ports:
-      - 1389:1389
-      - 1636:1636
-    environment:
-      - LDAP_ADMIN_USERNAME=root
-      - LDAP_ADMIN_PASSWORD=toor
-      - LDAP_USERS=miguel
-      - LDAP_PASSWORDS=leugim
-    networks:
-      - proyecto1
-    volumes:
-      - .docker/openldap_data:/bitnami/openldap/data
+#  openldap:
+#    image: bitnami/openldap:latest
+#    ports:
+#      - 1389:1389
+#      - 1636:1636
+#    environment:
+#      - LDAP_ADMIN_USERNAME=root
+#      - LDAP_ADMIN_PASSWORD=toor
+#      - LDAP_USERS=miguel
+#      - LDAP_PASSWORDS=leugim
+#    networks:
+#      - proyecto1
+#    volumes:
+#      - .docker/openldap_data:/bitnami/openldap/data
 
 
 networks:

@@ -39,7 +39,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 
 WORKDIR /var/www/html
 
-RUN useradd matomas && usermod -aG sudo matomas
+RUN useradd miguel && usermod -aG sudo miguel
 
 
 #Instalación de Composer
