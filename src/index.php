@@ -52,14 +52,9 @@ $router->get('/administrador/add-pelicula',function(){
 $router->post('/pelicula',function(){
     var_dump($_POST);
     var_dump($_FILES);
-    $carpetas=scandir(__DIR__);
-    if (!array_search('uploaded',$carpetas)){
-        mkdir(__DIR__."/uploaded");
-        move_uploaded_file($_FILES['poster']['tmp_name'],__DIR__."/uploaded/"."fichero.png");
 
-    }else{
-        move_uploaded_file($_FILES['poster']['tmp_name'],__DIR__."/uploaded/"."fichero.png");
-    }
+    organizarImagen($_FILES['poster'],$_POST['titulo']);
+
     #echo json_encode($_POST);
 
 });
