@@ -16,6 +16,11 @@ $router->get('/',function(){
     return 'Estoy en la página principal';
 });
 
+
+//Rutas de Usuario
+
+//$router->get('/user',[UserController:class,'show']);
+
 $router->get('/administrador',function(){
     include_once DIRECTORIO_VISTAS_ADMINISTRACION."welcome.php";
 });
