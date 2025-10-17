@@ -8,6 +8,7 @@ use App\Controller\MovieController;
 use App\Controller\UserController;
 use Phroute\Phroute\Exception\HttpRouteNotFoundException;
 use Phroute\Phroute\RouteCollector;
+use App\Controller\DirectorController;
 
 //instancia una variable de la clase RouteCollector
 $router = new RouteCollector();
@@ -24,8 +25,8 @@ $router->get('/',function(){
 $router->get('/user',[UserController::class,'index']);
 $router->get('/user/{id}',[UserController::class,'show']);
 $router->post('/user',[UserController::class,'store']);
-$router->put('/user',[UserController::class,'update']);
-$router->delete('/user',[UserController::class,'destroy']);
+$router->put('/user/{id}',[UserController::class,'update']);
+$router->delete('/user/{id}',[UserController::class,'destroy']);
 
 //Rutas asociadas a las vistas de usuario
 #$router->get('/user/create',[UserController::class,'create']);
@@ -38,15 +39,20 @@ $router->get('/user/{id}/edit',[UserController::class,'edit']);
 $router->get('/movie',[MovieController::class,'index']);
 $router->get('/movie/{id}',[MovieController::class,'show']);
 $router->post('/movie',[MovieController::class,'store']);
-$router->put('/movie',[MovieController::class,'update']);
-$router->delete('/movie',[MovieController::class,'destroy']);
+$router->put('/movie/{id}',[MovieController::class,'update']);
+$router->delete('/movie/{id}',[MovieController::class,'destroy']);
 
 //Rutas asociadas a las vistas de usuario
-#$router->get('/movie/create',[MovieController::class,'create']);
+$router->get('/create-movie',[MovieController::class,'create']);
 $router->get('/movie/{id}/edit',[MovieController::class,'edit']);
 
 
-
+//Rutas de Director CRUD
+$router->get('/director',[DirectorController::class,'index']);
+$router->get('/director/{id}',[DirectorController::class,'show']);
+$router->post('/director',[DirectorController::class,'store']);
+$router->put('/director/{id}',[DirectorController::class,'update']);
+$router->delete('/director/{id}',[DirectorController::class,'destroy']);
 
 
 

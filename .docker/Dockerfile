@@ -39,7 +39,14 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 
 WORKDIR /var/www/html
 
-RUN useradd miguel && usermod -aG sudo miguel
+ARG USERNAME=matomas
+ARG USER_UID=2012
+ARG USER_GID=5001
+
+RUN groupadd --gid $USER_GID $USERNAME \
+    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
+    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
+    && chmod 0440 /etc/sudoers.d/$USERNAME
 
 
 #Instalación de Composer

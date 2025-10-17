@@ -22,12 +22,12 @@ class UserController implements ControllerInterface
         var_dump($_POST);
     }
 
-    function update()
+    function update($id)
     {
         // TODO: Implement update() method.
     }
 
-    function destroy()
+    function destroy($id)
     {
         // TODO: Implement destroy() method.
     }
