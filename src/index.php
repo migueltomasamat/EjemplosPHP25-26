@@ -22,6 +22,9 @@ $router->get('/',function(){
 
 //Rutas de Usuario CRUD
 //Rutas de Servicio API REST
+$router->get('/user/create',[UserController::class,'create']);
+
+
 $router->get('/user',[UserController::class,'index']);
 $router->get('/user/{id}',[UserController::class,'show']);
 $router->post('/user',[UserController::class,'store']);
@@ -29,7 +32,6 @@ $router->put('/user/{id}',[UserController::class,'update']);
 $router->delete('/user/{id}',[UserController::class,'destroy']);
 
 //Rutas asociadas a las vistas de usuario
-#$router->get('/user/create',[UserController::class,'create']);
 $router->get('/user/{id}/edit',[UserController::class,'edit']);
 
 
@@ -124,9 +126,9 @@ $router->delete('/director/{id}',[DirectorController::class,'destroy']);
 
 
 
-//$router->get('/administrador',function(){
-//    include_once DIRECTORIO_VISTAS_ADMINISTRACION."welcome.php";
-//});
+$router->get('/administrador',function(){
+    include_once DIRECTORIO_VISTAS_ADMINISTRACION."welcome.php";
+});
 //$router->get('/login',function(){
 //    include_once DIRECTORIO_VISTAS."indice.php";
 //});
