@@ -2,8 +2,11 @@
 
 namespace App\Class;
 
-use App\Enum\TipoUsuario;
+use App\Enum\UserType;
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
+use Respect\Validation\Exceptions\NestedValidationException;
+use Respect\Validation\Validator as v;
 
 class User implements \JsonSerializable
 {
@@ -13,14 +16,14 @@ class User implements \JsonSerializable
     private string $email;
     private int $edad;
     private array $visualizaciones;
-    private TipoUsuario $tipo;
+    private UserType $type;
 
-    public function __construct(UuidInterface $uuid,string $username,string $password,string $email,TipoUsuario $type=TipoUsuario::NORMAL){
+    public function __construct(UuidInterface $uuid, string $username, string $password, string $email, UserType $type=UserType::NORMAL){
         $this->uuid=$uuid;
         $this->username=$username;
         $this->password=$password;
         $this->email=$email;
-        $this->tipo=$type;
+        $this->type=$type;
         $this->visualizaciones=[];
     }
 
@@ -90,14 +93,14 @@ class User implements \JsonSerializable
         return $this;
     }
 
-    public function getTipo(): TipoUsuario
+    public function getType(): UserType
     {
-        return $this->tipo;
+        return $this->type;
     }
 
-    public function setTipo(TipoUsuario $tipo): User
+    public function setType(UserType $tipo): User
     {
-        $this->tipo = $tipo;
+        $this->type = $tipo;
         return $this;
     }
 
@@ -111,5 +114,31 @@ class User implements \JsonSerializable
           "tipo"=>$this->tipo->name,
           "visualizaciones"=>$this->visualizaciones
         ];
+    }
+
+    public static function validateUser(array $userData):User|array{
+
+        try {
+            v::key('username', v::stringType())
+                ->key('password', v::stringType()->length(3, 16))
+                ->key('email', v::email())
+                ->key('edad', v::intVal()->min(18))
+                ->key('type', v::in(["normal", "anuncios", "admin"])
+                )->assert($userData);
+        }catch(NestedValidationException $errores){
+
+            return $errores->getMessages();
+        }
+
+        $usuario = new User(
+        Uuid::uuid4(),
+        $userData['username'],
+        $userData['password'],
+        $userData['email']);
+
+        $usuario->setEdad($userData['edad']);
+        $usuario->setType(UserType::stringToUserType($userData['type']));
+
+        return $usuario;
     }
 }
