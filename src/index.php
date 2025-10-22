@@ -3,6 +3,8 @@ include_once "vendor/autoload.php";
 include_once "env.php";
 include_once "auxiliar/funciones.php";
 
+session_start();
+
 //Directiva para inserta o utilizar la clase RouteCollector
 use App\Controller\MovieController;
 use App\Controller\UserController;
@@ -21,18 +23,25 @@ $router->get('/',function(){
 
 
 //Rutas de Usuario CRUD
-//Rutas de Servicio API REST
+//Rutas asociadas a las vistas de usuario
+$router->get('/user/{id}/edit',[UserController::class,'edit']);
 $router->get('/user/create',[UserController::class,'create']);
+$router->get('/login',[UserController::class,'show-login']);
+$router->post('/user/login',[UserController::class,'verify']);
 
-
+//Rutas para la aplicacion web visual
 $router->get('/user',[UserController::class,'index']);
 $router->get('/user/{id}',[UserController::class,'show']);
 $router->post('/user',[UserController::class,'store']);
 $router->put('/user/{id}',[UserController::class,'update']);
 $router->delete('/user/{id}',[UserController::class,'destroy']);
 
-//Rutas asociadas a las vistas de usuario
-$router->get('/user/{id}/edit',[UserController::class,'edit']);
+//Rutas de Servicio API REST
+$router->get('/api/user',[UserController::class,'index']);
+$router->get('/api/user/{id}',[UserController::class,'show']);
+$router->post('/api/user',[UserController::class,'store']);
+$router->put('/api/user/{id}',[UserController::class,'update']);
+$router->delete('/api/user/{id}',[UserController::class,'destroy']);
 
 
 
@@ -154,7 +163,7 @@ $router->get('/administrador',function(){
 //
 //
 //$router->get('/administrador/add-pelicula',function(){
-//    include_once "admin/views/add-pelicula.php";
+//    include_once "Admin/views/add-pelicula.php";
 //
 //
 //});

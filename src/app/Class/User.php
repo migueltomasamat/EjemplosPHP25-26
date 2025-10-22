@@ -116,14 +116,14 @@ class User implements \JsonSerializable
         ];
     }
 
-    public static function validateUser(array $userData):User|array{
+    public static function validateUserCreation(array $userData):User|array{
 
         try {
             v::key('username', v::stringType())
                 ->key('password', v::stringType()->length(3, 16))
                 ->key('email', v::email())
                 ->key('edad', v::intVal()->min(18))
-                ->key('type', v::in(["normal", "anuncios", "admin"])
+                ->key('type', v::in(["normal", "anuncios", "Admin"])
                 )->assert($userData);
         }catch(NestedValidationException $errores){
 
@@ -140,5 +140,32 @@ class User implements \JsonSerializable
         $usuario->setType(UserType::stringToUserType($userData['type']));
 
         return $usuario;
+    }
+
+    public static function validateUserEdit(array $userData):User|array{
+        try {
+            v::key('uuid',v::uuid())
+                ->optional(v::key('username', v::stringType()))
+                ->optional(v::key('password', v::stringType()->length(3, 16)))
+                ->optional(v::key('email', v::email()))
+                ->optional(v::key('edad', v::intVal()->min(18)))
+                ->optional(v::key('type', v::in(["normal", "anuncios", "Admin"])))->assert($userData);
+        }catch(NestedValidationException $errores){
+
+            return $errores->getMessages();
+        }
+
+        //TODO Buscar el usuario en la base de datos y luego modificarlo
+        // isset($userData['username'])  $userData['username']??user->getUsername()
+        return new User(
+            Uuid::fromString($userData['uuid']),
+            $userData['username'],
+            'leugim',
+            'miguel@miguel.com',
+            UserType::stringToUserType($userData['type'])
+        );
+
+
+
     }
 }

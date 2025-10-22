@@ -13,7 +13,7 @@ enum UserType
        return match(strtolower($type)){
            "normal"=>UserType::NORMAL,
            "anuncios"=>UserType::ANUNCIOS,
-           "admin"=>UserType::ADMIN,
+           "Admin"=>UserType::ADMIN,
            default=>UserType::NORMAL
        };
 
