@@ -64,10 +64,19 @@ class UserController implements ControllerInterface
     }
 
     function verify(){
-        $_POST['username'];
-        $_POST['password'];
+        /*$_POST['username'];
+        $_POST['password'];*/
+
+        var_dump($_POST);
 
         //Si es correcto el login
         $_SESSION['username']=$_POST['username'];
+
+        var_dump($_SESSION);
+    }
+
+
+    function show_login(){
+        include_once "app/Views/frontend/login.php";
     }
 }

@@ -1,9 +1,8 @@
 <?php
-include "../env.php";
 $titulo = "Generar Contraseña";
-include "template/head.php";
-include "template/header.php";
-include "template/subheader.php";
+include DIRECTORIO_TEMPLATE_FRONTEND."head.php";
+include DIRECTORIO_TEMPLATE_FRONTEND."header.php";
+include DIRECTORIO_TEMPLATE_FRONTEND."subheader.php";
 ?>
 <!--HTML personalizado para mi página-->
 <div class="texto">

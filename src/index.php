@@ -26,7 +26,7 @@ $router->get('/',function(){
 //Rutas asociadas a las vistas de usuario
 $router->get('/user/{id}/edit',[UserController::class,'edit']);
 $router->get('/user/create',[UserController::class,'create']);
-$router->get('/login',[UserController::class,'show-login']);
+$router->get('/login',[UserController::class,'show_login']);
 $router->post('/user/login',[UserController::class,'verify']);
 
 //Rutas para la aplicacion web visual
