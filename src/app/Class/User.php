@@ -144,16 +144,16 @@ class User implements \JsonSerializable
 
     public static function validateUserEdit(array $userData):User|array{
         try {
-            v::key('uuid',v::uuid())
-                ->optional(v::key('username', v::stringType()))
-                ->optional(v::key('password', v::stringType()->length(3, 16)))
-                ->optional(v::key('email', v::email()))
-                ->optional(v::key('edad', v::intVal()->min(18)))
-                ->optional(v::key('type', v::in(["normal", "anuncios", "Admin"])))->assert($userData);
+            v::key('uuid',v::uuid(),true)
+                ->key('username', v::stringType(),false)
+                ->key('password', v::stringType()->length(3, 16),false)
+                ->key('email', v::email(),false)
+                ->key('edad', v::intVal()->min(18),false)
+                ->key('type', v::in(["normal", "anuncios", "admin"]),false)->assert($userData);
         }catch(NestedValidationException $errores){
-
             return $errores->getMessages();
         }
+
 
         //TODO Buscar el usuario en la base de datos y luego modificarlo
         // isset($userData['username'])  $userData['username']??user->getUsername()
