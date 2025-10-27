@@ -19,6 +19,11 @@ class UserController implements ControllerInterface
 
     function show($id)
     {
+        if (isset($_SESSION['username'])){
+            //Muestro la vista con los datos del usuario
+        }else{
+            //Muestro una vista de no se puede acceder a estos datos
+        }
         return "Estos son los datos del usuario $id";
     }
 
@@ -67,12 +72,26 @@ class UserController implements ControllerInterface
         /*$_POST['username'];
         $_POST['password'];*/
 
+        $hash=password_hash($_POST['password'],PASSWORD_DEFAULT);
+        var_dump($hash);
+
+        var_dump(password_verify($_POST['password'],$hash));
+
         var_dump($_POST);
+        $idUsuario="706fd07e-d403-45bb-8a79-aca9886aae1d";
+
+        //Peticion a la base de datos para comprobar si el usuario existe
+
 
         //Si es correcto el login
         $_SESSION['username']=$_POST['username'];
+        $_SESSION['uuid']=$idUsuario;
 
         var_dump($_SESSION);
+    }
+
+    function logout(){
+        session_destroy();
     }
 
 
