@@ -19,12 +19,15 @@ class UserController implements ControllerInterface
 
     function show($id)
     {
-        if (isset($_SESSION['username'])){
-            //Muestro la vista con los datos del usuario
+        if (isset($_SESSION['user'])){
+            if ($_SESSION['user']->isAdmin()) {
+                include_once DIRECTORIO_VISTAS_BACKEND . "User/mostrarUser.php";
+            }else{
+                include_once DIRECTORIO_VISTAS_FRONTEND. "mostrarUser.php";
+            }
         }else{
-            //Muestro una vista de no se puede acceder a estos datos
+            return "Ruta no disponible para tu usuario";
         }
-        return "Estos son los datos del usuario $id";
     }
 
     function store()

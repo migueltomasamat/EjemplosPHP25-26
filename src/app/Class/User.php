@@ -98,6 +98,14 @@ class User implements \JsonSerializable
         return $this->type;
     }
 
+    public function isAdmin():bool{
+
+        $retorno=$this->type==UserType::ADMIN?true:false;
+
+        return $retorno;
+
+    }
+
     public function setType(UserType $tipo): User
     {
         $this->type = $tipo;
