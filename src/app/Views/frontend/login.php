@@ -1,22 +1,42 @@
-<htlm>
-    <head>
-        <title>Iniciar Sesión</title>
-    </head>
-    <body>
-
-    <h1>Bienvenido a Netflix</h1>
-    <form action="/user/login" method="post">
-        <label for="inputUsername">Nombre de Usuario</label>
-        <input type="text" id="inputUsername" name="username" placeholder="Introduce tu usuario" aria-label="Input de Username">
-
-        <label for="inputPassword">Introduce tu contraseña</label>
-        <input type="password" id="inputPassword" name="password" placeholder="Introduce tu contraseña" aria-label="Input de Password">
-
-        <input type="submit" value="Iniciar Sesión">
-
-    </form>
-
-
-    </body>
-
-</htlm>
+<?php
+$titulo = "Iniciar Sesión";
+include DIRECTORIO_TEMPLATE_FRONTEND."head.php";
+?>
+<body>
+    <div class="contenido">
+      <nav>
+        <img class="logo" src="<?=DIRECTORIO_IMG_FRONTEND?>logo.png" alt="netflixLogo" />
+      </nav>
+      <div class="caja">
+        <h2>Iniciar sesión</h2>
+        <div class="form">
+          <input
+            type="text"
+            placeholder="Correo electrónico o número de teléfono"
+            required
+            />
+          <input type="password" placeholder="Contraseña" required />
+        </div>
+        <button>Iniciar sesión</button>
+        <div class="checkbox">
+          <div class="recordar">
+            <input type="checkbox" id="checkbox1"/>
+            <label for="remember">Recuérdame</label>
+          </div>
+          <div>
+            <p>¿Necesitas ayuda?</p>
+          </div>
+        </div>
+        <div class="subscripcion">
+          <p>¿Todavía sin Netflix? <span>Subscríbete ya.</span></p>
+          <p>Esta página utiliza Google reCAPTCHA para garantizar que no eres un robot.
+            <br/> <br/> La información recopilada por Google reCAPTCHA está sujeta a la <a href="https://policies.google.com/privacy">Política de Privacidad</a>
+y las <a href="https://policies.google.com/terms">Condiciones de servicio</a> de
+          Google, y se utiliza para proporcionar, mantener y mejorar el servicio de reCAPTCHA, así como para fines generales de
+          seguridad (Google no la utiliza para publicidad personalizada). </p>
+        </div>
+      </div>
+    </div>
+  </body>
+<?php
+include_once DIRECTORIO_TEMPLATE_FRONTEND."footer.php";

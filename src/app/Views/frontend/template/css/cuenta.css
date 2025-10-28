@@ -89,6 +89,7 @@ textarea:focus, input:focus {
 
 .caja .checkbox{
     display: flex;
+    flex-direction: column;
     align-items: center;
     color: #b3b3b3;
     font-size: 14px;
@@ -118,6 +119,10 @@ textarea:focus, input:focus {
 
 .caja .checkbox div p:hover {
     text-decoration: underline;
+}
+.subscripcion{
+    display: flex;
+    flex-direction: column;
 }
 
 .caja .subscripcion p{

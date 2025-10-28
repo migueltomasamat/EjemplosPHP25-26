@@ -1,8 +1,7 @@
 <div class="header">
     <nav>
         <div class="centro-ayuda">
-            <img src="img/logo.png" alt="NetflixLogo" class="logo" />
-            <p>| Centro de Ayuda</p>
+            <img src="<?=DIRECTORIO_IMG_FRONTEND?>logo.png" alt="NetflixLogo" class="logo" />
         </div>
         <div>
             <button class="subscripcion">SUBSCRIBIRSE A NETFLIX</button>
