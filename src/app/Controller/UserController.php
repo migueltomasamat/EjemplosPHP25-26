@@ -14,7 +14,7 @@ class UserController implements ControllerInterface
     function index()
     {
         $usuarios = UserModel::getAllUsers();
-        include_once DIRECTORIO_VISTAS_ADMINISTRACION."allusers.php";
+        include_once DIRECTORIO_VISTAS_BACKEND."User/allusers.php";
     }
 
     function show($id)
@@ -36,6 +36,9 @@ class UserController implements ControllerInterface
 
     function update($id)
     {
+
+
+        return "El usuario $id ha sido modificado";
         //Leo del fichero input los datos que me han llegado en la petición PUT
         parse_str(file_get_contents("php://input"),$editData);
 
@@ -60,12 +63,17 @@ class UserController implements ControllerInterface
 
     function create()
     {
-        return "formulario para crear usuario";
+        return include_once DIRECTORIO_VISTAS_BACKEND."User/createUser.php";
     }
 
     function edit($id)
     {
-        // TODO: Implement edit() method.
+        // Recuperar los datos de un usuario del Modelo
+        $usuario = UserModel::getUserById($id);
+
+        //Llamar a la vista que me muestre los datos del usuario
+        include_once DIRECTORIO_VISTAS_BACKEND."User/editUser.php";
+
     }
 
     function verify(){

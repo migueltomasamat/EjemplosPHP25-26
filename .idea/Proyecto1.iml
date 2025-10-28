@@ -19,6 +19,10 @@
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/symfony/translation-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/phroute/phroute" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/respect/stringifier" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/respect/validation" />
+      <excludeFolder url="file://$MODULE_DIR$/.docker/mariadb" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
