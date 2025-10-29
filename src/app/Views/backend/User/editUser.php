@@ -51,7 +51,7 @@ include_once(DIRECTORIO_TEMPLATE_BACKEND."main.php");
 
                 fetch("http://localhost:8080/user/<?=$usuario->getUuid()?>", requestOptions)
                     .then((response) => response.text())
-                    .then((result) => console.log(result))
+                    .then((result) => volverAUsuarios())
                     .catch((error) => console.error(error));
 
 

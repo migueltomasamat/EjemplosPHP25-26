@@ -5,12 +5,26 @@ include_once "auxiliar/funciones.php";
 
 session_start();
 
+
 //Directiva para inserta o utilizar la clase RouteCollector
 use App\Controller\MovieController;
 use App\Controller\UserController;
 use Phroute\Phroute\Exception\HttpRouteNotFoundException;
 use Phroute\Phroute\RouteCollector;
 use App\Controller\DirectorController;
+use App\Class\User;
+use App\Enum\UserType;
+use Ramsey\Uuid\Uuid;
+
+
+$usuario=new User(
+    Uuid::uuid4(),
+    "miguel",
+    "leugim",
+    "miguel@miguel.com",
+    UserType::ADMIN
+);
+$_SESSION['user']=$usuario;
 
 //instancia una variable de la clase RouteCollector
 $router = new RouteCollector();

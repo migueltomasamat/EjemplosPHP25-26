@@ -20,6 +20,7 @@ class UserController implements ControllerInterface
     function show($id)
     {
         if (isset($_SESSION['user'])){
+            $usuario=UserModel::getUserById($_SESSION['user']->getUuid());
             if ($_SESSION['user']->isAdmin()) {
                 include_once DIRECTORIO_VISTAS_BACKEND . "User/mostrarUser.php";
             }else{
@@ -30,10 +31,34 @@ class UserController implements ControllerInterface
         }
     }
 
+    function create()
+    {
+        return include_once DIRECTORIO_VISTAS_BACKEND."User/createUser.php";
+    }
+
+
     function store()
     {
+        $resultado = User::validateUserCreation($_POST);
 
-        var_dump(User::validateUserCreation($_POST));
+        if (is_array($resultado)){
+            //Tenemos los datos con errores
+            include_once DIRECTORIO_VISTAS_BACKEND."/User/createUser.php";
+
+        }else{
+            //La validación a creado un usuario correcto y tengo que guardarlo
+
+            //UserModel::saveUser($resultado);
+        }
+
+    }
+    function edit($id)
+    {
+        // Recuperar los datos de un usuario del Modelo
+        $usuario = UserModel::getUserById($id);
+
+        //Llamar a la vista que me muestre los datos del usuario
+        include_once DIRECTORIO_VISTAS_BACKEND."User/editUser.php";
 
     }
 
@@ -41,9 +66,10 @@ class UserController implements ControllerInterface
     {
 
 
-        return "El usuario $id ha sido modificado";
         //Leo del fichero input los datos que me han llegado en la petición PUT
-        parse_str(file_get_contents("php://input"),$editData);
+        $editData=json_decode(file_get_contents("php://input"),true);
+
+        var_dump($editData);
 
         //Añado el uuid a los datos que me han llegado en la petición PUT
         $editData['uuid']=$id;
@@ -61,23 +87,11 @@ class UserController implements ControllerInterface
 
     function destroy($id)
     {
-        // TODO: Implement destroy() method.
+        //Llamamos a la función del modelo que nos permite borrar a un usuario
     }
 
-    function create()
-    {
-        return include_once DIRECTORIO_VISTAS_BACKEND."User/createUser.php";
-    }
 
-    function edit($id)
-    {
-        // Recuperar los datos de un usuario del Modelo
-        $usuario = UserModel::getUserById($id);
 
-        //Llamar a la vista que me muestre los datos del usuario
-        include_once DIRECTORIO_VISTAS_BACKEND."User/editUser.php";
-
-    }
 
     function verify(){
         /*$_POST['username'];

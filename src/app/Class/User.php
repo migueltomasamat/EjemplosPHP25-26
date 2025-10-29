@@ -130,9 +130,9 @@ class User implements \JsonSerializable
             v::key('username', v::stringType())
                 ->key('password', v::stringType()->length(3, 16))
                 ->key('email', v::email())
-                ->key('edad', v::intVal()->min(18))
-                ->key('type', v::in(["normal", "anuncios", "Admin"])
-                )->assert($userData);
+                ->key('edad', v::intVal()->min(18),true)
+                ->key('type', v::in(["normal", "anuncios", "Admin"]),true)
+                ->assert($userData);
         }catch(NestedValidationException $errores){
 
             return $errores->getMessages();
@@ -170,7 +170,7 @@ class User implements \JsonSerializable
             $userData['username'],
             'leugim',
             'miguel@miguel.com',
-            UserType::stringToUserType($userData['type'])
+            UserType::stringToUserType($userData['type']??'normal')
         );
 
 
