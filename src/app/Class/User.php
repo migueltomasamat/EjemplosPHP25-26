@@ -119,7 +119,7 @@ class User implements \JsonSerializable
           "username"=>$this->username,
           "email"=>$this->email,
           "edad"=>$this->edad??null,
-          "tipo"=>$this->tipo->name,
+          "tipo"=>$this->type->name,
           "visualizaciones"=>$this->visualizaciones
         ];
     }

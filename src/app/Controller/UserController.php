@@ -94,25 +94,8 @@ class UserController implements ControllerInterface
 
 
     function verify(){
-        /*$_POST['username'];
-        $_POST['password'];*/
+        //Obtenemos los datos de la petición POST
 
-        $hash=password_hash($_POST['password'],PASSWORD_DEFAULT);
-        var_dump($hash);
-
-        var_dump(password_verify($_POST['password'],$hash));
-
-        var_dump($_POST);
-        $idUsuario="706fd07e-d403-45bb-8a79-aca9886aae1d";
-
-        //Peticion a la base de datos para comprobar si el usuario existe
-
-
-        //Si es correcto el login
-        $_SESSION['username']=$_POST['username'];
-        $_SESSION['uuid']=$idUsuario;
-
-        var_dump($_SESSION);
     }
 
     function logout(){
