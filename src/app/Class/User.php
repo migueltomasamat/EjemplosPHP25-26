@@ -124,6 +124,19 @@ class User implements \JsonSerializable
         ];
     }
 
+    public static function createFromArray(array $userData):User{
+        $usuario = new User(
+            Uuid::uuid4(),
+            $userData['username'],
+            $userData['password'],
+            $userData['email']);
+
+        $usuario->setEdad($userData['edad']);
+        $usuario->setType(UserType::stringToUserType($userData['type']));
+
+        return $usuario;
+    }
+
     public static function validateUserCreation(array $userData):User|array{
 
         try {
@@ -138,16 +151,7 @@ class User implements \JsonSerializable
             return $errores->getMessages();
         }
 
-        $usuario = new User(
-        Uuid::uuid4(),
-        $userData['username'],
-        $userData['password'],
-        $userData['email']);
-
-        $usuario->setEdad($userData['edad']);
-        $usuario->setType(UserType::stringToUserType($userData['type']));
-
-        return $usuario;
+        return User::createFromArray($userData);
     }
 
     public static function validateUserEdit(array $userData):User|array{

@@ -22,9 +22,9 @@ class UserController implements ControllerInterface
         if (isset($_SESSION['user'])){
             $usuario=UserModel::getUserById($_SESSION['user']->getUuid());
             if ($_SESSION['user']->isAdmin()) {
-                include_once DIRECTORIO_VISTAS_BACKEND . "User/mostrarUser.php";
+                return include_once DIRECTORIO_VISTAS_BACKEND . "User/mostrarUser.php";
             }else{
-                include_once DIRECTORIO_VISTAS_FRONTEND. "mostrarUser.php";
+                return include_once DIRECTORIO_VISTAS_FRONTEND. "mostrarUser.php";
             }
         }else{
             return "Ruta no disponible para tu usuario";
@@ -47,8 +47,8 @@ class UserController implements ControllerInterface
 
         }else{
             //La validación a creado un usuario correcto y tengo que guardarlo
-
-            //UserModel::saveUser($resultado);
+            $resultado->setPassword(password_hash($resultado->getPassword(),PASSWORD_DEFAULT));
+            UserModel::saveUser($resultado);
         }
 
     }
