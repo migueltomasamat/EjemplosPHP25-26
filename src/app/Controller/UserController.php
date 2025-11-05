@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Class\User;
+use App\Enum\UserType;
 use App\Interface\ControllerInterface;
 use App\Model\UserModel;
 use Respect\Validation\Exceptions\NestedValidationException;
@@ -19,16 +20,9 @@ class UserController implements ControllerInterface
 
     function show($id)
     {
-        if (isset($_SESSION['user'])){
-            $usuario=UserModel::getUserById($_SESSION['user']->getUuid());
-            if ($_SESSION['user']->isAdmin()) {
-                return include_once DIRECTORIO_VISTAS_BACKEND . "User/mostrarUser.php";
-            }else{
-                return include_once DIRECTORIO_VISTAS_FRONTEND. "mostrarUser.php";
-            }
-        }else{
-            return "Ruta no disponible para tu usuario";
-        }
+        $usuario=UserModel::getUserById($id);
+        include_once DIRECTORIO_VISTAS_BACKEND."User/mostrarUser.php";
+
     }
 
     function create()
@@ -41,6 +35,7 @@ class UserController implements ControllerInterface
     {
         $resultado = User::validateUserCreation($_POST);
 
+
         if (is_array($resultado)){
             //Tenemos los datos con errores
             include_once DIRECTORIO_VISTAS_BACKEND."/User/createUser.php";
@@ -49,6 +44,7 @@ class UserController implements ControllerInterface
             //La validación a creado un usuario correcto y tengo que guardarlo
             $resultado->setPassword(password_hash($resultado->getPassword(),PASSWORD_DEFAULT));
             UserModel::saveUser($resultado);
+            header('Location: /user');
         }
 
     }
@@ -69,24 +65,28 @@ class UserController implements ControllerInterface
         //Leo del fichero input los datos que me han llegado en la petición PUT
         $editData=json_decode(file_get_contents("php://input"),true);
 
-        var_dump($editData);
+        //var_dump($editData);
 
         //Añado el uuid a los datos que me han llegado en la petición PUT
         $editData['uuid']=$id;
 
         //Valido los datos que me han llegado en la petición PUT
         $usuario = User::validateUserEdit($editData);
+        //var_dump($usuario);
 
         //TODO guardo el usuario actualizado en la base de datos
+        UserModel::updateUser($usuario);
 
         //Muesto los datos del usuario o los errores en la petición si los hay
-        var_dump($usuario);
+        //var_dump($usuario);
 
 
     }
 
     function destroy($id)
     {
+        UserModel::deleteUserById($id);
+        //http_response_code()
         //Llamamos a la función del modelo que nos permite borrar a un usuario
     }
 
@@ -95,6 +95,28 @@ class UserController implements ControllerInterface
 
     function verify(){
         //Obtenemos los datos de la petición POST
+        //var_dump($_POST);
+
+        //Petición a la base de datos para recuperar la info del usuario
+        $usuario = UserModel::getUserByUsername($_POST['username']);
+
+        if (password_verify($_POST['password'],$usuario->getPassword())){
+            //Tengo un usuario valido
+            $_SESSION['user']=$usuario;
+            if ($usuario->isAdmin()){
+                //Tenemos a un usuario administrador
+                header('Location:/user');
+            }else{
+                //Tenemos a un usuario corriente
+                header('Location: /');
+            }
+
+        }else{
+            $error="Usuario o contraseña incorrecto";
+            include_once DIRECTORIO_VISTAS."errorVisual";
+            //No tengo un usuario valido
+        }
+
 
     }
 

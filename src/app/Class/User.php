@@ -3,6 +3,7 @@
 namespace App\Class;
 
 use App\Enum\UserType;
+use App\Model\UserModel;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Respect\Validation\Exceptions\NestedValidationException;
@@ -125,8 +126,13 @@ class User implements \JsonSerializable
     }
 
     public static function createFromArray(array $userData):User{
+
+        if(!isset($userData['uuid'])){
+            $userData['uuid']=Uuid::uuid4()->toString();
+        }
+
         $usuario = new User(
-            Uuid::uuid4(),
+            Uuid::fromString($userData['uuid']),
             $userData['username'],
             $userData['password'],
             $userData['email']);
@@ -166,18 +172,15 @@ class User implements \JsonSerializable
             return $errores->getMessages();
         }
 
+        $usuarioAntiguo=UserModel::getUserById($userData['uuid']);
 
-        //TODO Buscar el usuario en la base de datos y luego modificarlo
-        // isset($userData['username'])  $userData['username']??user->getUsername()
-        return new User(
-            Uuid::fromString($userData['uuid']),
-            $userData['username'],
-            'leugim',
-            'miguel@miguel.com',
-            UserType::stringToUserType($userData['type']??'normal')
-        );
+        $usuarioAntiguo->setUsername($userData['username']??$usuarioAntiguo->getUsername());
+        $usuarioAntiguo->setPassword(password_hash($userData['password'],PASSWORD_DEFAULT)??$usuarioAntiguo->getPassword());
+        $usuarioAntiguo->setEmail($userData['email']??$usuarioAntiguo->getEmail());
+        $usuarioAntiguo->setEdad($userData['edad']??$usuarioAntiguo->getEdad());
+        $usuarioAntiguo->setType(UserType::stringToUserType($userData['type']??$usuarioAntiguo->getType()->name));
 
-
+        return $usuarioAntiguo;
 
     }
 }

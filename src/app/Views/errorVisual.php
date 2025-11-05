@@ -18,7 +18,7 @@
 <div class='c'>
     <div class='_404'>404</div>
     <hr>
-    <div class='_1'><?=$_SERVER['REQUEST_URI']?> </div>
+    <div class='_1'><?=$error??"Toooooonto!!!"?> </div>
     <div class='_2'>NO ENCONTRADA</div>
     <a class='btn' href='/'>INICIO</a>
 </div>

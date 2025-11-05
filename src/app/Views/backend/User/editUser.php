@@ -57,7 +57,8 @@ include_once(DIRECTORIO_TEMPLATE_BACKEND."main.php");
 
             }
 
-            function volverAUsuarios{
+
+            function volverAUsuarios(){
                 window.location.replace("http://localhost:8080/user")
             }
 

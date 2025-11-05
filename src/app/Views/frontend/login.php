@@ -9,20 +9,25 @@ include DIRECTORIO_TEMPLATE_FRONTEND."head.php";
       </nav>
       <div class="caja">
         <h2>Iniciar sesión</h2>
+          <form action="/user/login" method="post">
         <div class="form">
           <input
             type="text"
             placeholder="Correo electrónico o número de teléfono"
+            name="username"
             required
             />
-          <input type="password" placeholder="Contraseña" required />
+          <input type="password" placeholder="Contraseña"
+                 name="password" required />
         </div>
-        <button>Iniciar sesión</button>
+        <button type="submit">Iniciar sesión</button>
         <div class="checkbox">
           <div class="recordar">
             <input type="checkbox" id="checkbox1"/>
             <label for="remember">Recuérdame</label>
           </div>
+            </form>
+
           <div>
             <p>¿Necesitas ayuda?</p>
           </div>

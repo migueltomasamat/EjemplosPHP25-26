@@ -17,22 +17,13 @@ use App\Enum\UserType;
 use Ramsey\Uuid\Uuid;
 
 
-$usuario=new User(
-    Uuid::uuid4(),
-    "miguel",
-    "leugim",
-    "miguel@miguel.com",
-    UserType::ADMIN
-);
-$_SESSION['user']=$usuario;
-
 //instancia una variable de la clase RouteCollector
 $router = new RouteCollector();
 
 //Definir las rutas de mi aplicación
 
 $router->get('/',function(){
-    return 'Estoy en la página principal';
+    return 'Hola '.$_SESSION['user']->getUsername().'</br>Estoy en la página principal';
 });
 
 
