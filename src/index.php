@@ -20,6 +20,35 @@ use Ramsey\Uuid\Uuid;
 //instancia una variable de la clase RouteCollector
 $router = new RouteCollector();
 
+
+//Definir los filtros de las rutas
+$router->filter('auth',function(){
+
+    if(isset($_SESSION['user'])){
+        return true;
+    }else{
+        header('Location: /login');
+        return false;
+    }
+});
+
+
+$router->filter('admin',function(){
+
+    if (isset($_SESSION['user']) && $_SESSION['user']->isAdmin()){
+        return true;
+    }else{
+        header('Location: /error');
+        return false;
+    }
+
+});
+
+$router->get('/error',function(){
+    $error="No puedes acceder a este apartado";
+    include_once DIRECTORIO_VISTAS."errorVisual.php";
+});
+
 //Definir las rutas de mi aplicación
 
 $router->get('/',function(){
@@ -29,18 +58,18 @@ $router->get('/',function(){
 
 //Rutas de Usuario CRUD
 //Rutas asociadas a las vistas de usuario
-$router->get('/user/{id}/edit',[UserController::class,'edit']);
-$router->get('/user/create',[UserController::class,'create']);
+$router->get('/user/{id}/edit',[UserController::class,'edit'],["before"=>'auth']);
+$router->get('/user/create',[UserController::class,'create'],["before"=>'auth']);
 $router->get('/login',[UserController::class,'show_login']);
 $router->post('/user/login',[UserController::class,'verify']);
-$router->get('/user/logout',[UserController::class,'logout']);
+$router->get('/user/logout',[UserController::class,'logout'],["before"=>'auth']);
 
 //Rutas para la aplicacion web visual
 $router->get('/user',[UserController::class,'index']);
 $router->get('/user/{id}',[UserController::class,'show']);
 $router->post('/user',[UserController::class,'store']);
 $router->put('/user/{id}',[UserController::class,'update']);
-$router->delete('/user/{id}',[UserController::class,'destroy']);
+$router->delete('/user/{id}',[UserController::class,'destroy'],["before"=>'admin']);
 
 //Rutas de Servicio API REST
 $router->get('/api/user',[UserController::class,'index']);

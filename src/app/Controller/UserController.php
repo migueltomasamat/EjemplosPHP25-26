@@ -15,7 +15,13 @@ class UserController implements ControllerInterface
     function index()
     {
         $usuarios = UserModel::getAllUsers();
-        include_once DIRECTORIO_VISTAS_BACKEND."User/allusers.php";
+        if($_SERVER['REQUEST_URI']=='api'){
+
+            http_response_code(201);
+            return json_encode($usuarios);
+        }else{
+            include_once DIRECTORIO_VISTAS_BACKEND."User/allusers.php";
+        }
     }
 
     function show($id)
@@ -113,7 +119,7 @@ class UserController implements ControllerInterface
 
         }else{
             $error="Usuario o contraseña incorrecto";
-            include_once DIRECTORIO_VISTAS."errorVisual";
+            include_once DIRECTORIO_VISTAS."errorVisual.php";
             //No tengo un usuario valido
         }
 
