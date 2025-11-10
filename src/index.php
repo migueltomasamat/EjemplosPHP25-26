@@ -24,9 +24,7 @@ $router = new RouteCollector();
 //Definir los filtros de las rutas
 $router->filter('auth',function(){
 
-    if(isset($_SESSION['user'])){
-        return true;
-    }else{
+    if(!isset($_SESSION['user'])) {
         header('Location: /login');
         return false;
     }
@@ -35,13 +33,10 @@ $router->filter('auth',function(){
 
 $router->filter('admin',function(){
 
-    if (isset($_SESSION['user']) && $_SESSION['user']->isAdmin()){
-        return true;
-    }else{
+    if (!isset($_SESSION['user']) && !$_SESSION['user']->isAdmin()){
         header('Location: /error');
         return false;
     }
-
 });
 
 $router->get('/error',function(){
@@ -52,7 +47,7 @@ $router->get('/error',function(){
 //Definir las rutas de mi aplicación
 
 $router->get('/',function(){
-    return 'Hola '.$_SESSION['user']->getUsername().'</br>Estoy en la página principal';
+    return include_once DIRECTORIO_VISTAS_FRONTEND."frontindex.php";
 });
 
 

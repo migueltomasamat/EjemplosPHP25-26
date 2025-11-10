@@ -101,7 +101,6 @@ class UserController implements ControllerInterface
 
     function verify(){
         //Obtenemos los datos de la petición POST
-        //var_dump($_POST);
 
         //Petición a la base de datos para recuperar la info del usuario
         $usuario = UserModel::getUserByUsername($_POST['username']);

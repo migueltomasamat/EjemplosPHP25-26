@@ -112,6 +112,9 @@ class User implements \JsonSerializable
         $this->type = $tipo;
         return $this;
     }
+    public function getUserImage():string{
+        return DIRECTORIO_IMG_FRONTEND."user.png";
+    }
 
 
     public function jsonSerialize(): mixed

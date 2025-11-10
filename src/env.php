@@ -4,8 +4,9 @@ const DIRECTORIO_VISTAS = "app/Views/";
 const DIRECTORIO_VISTAS_FRONTEND = "app/Views/frontend/";
 const DIRECTORIO_TEMPLATE_FRONTEND = "app/Views/frontend/template/";
 const DIRECTORIO_CSS_FRONTEND = "/app/Views/frontend/template/css/";
-const DIRECTORIO_IMG_FRONTEND = "/app/Views/frontend/template/css/img/";
-const DIRECTORIO_JS_FRONTEND = "/app/Views/frontend/template/css/js/";
+const DIRECTORIO_IMG_FRONTEND = "/app/Views/frontend/template/img/";
+const DIRECTORIO_VIDEO_FRONTEND = "/app/Views/frontend/template/video/";
+const DIRECTORIO_JS_FRONTEND = "/app/Views/frontend/template/js/";
 
 
 
