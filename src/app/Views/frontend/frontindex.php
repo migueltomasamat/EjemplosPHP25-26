@@ -51,14 +51,10 @@
                     <?php
                         if (!isset($_SESSION['user'])){
                             echo "<a href='/login'class='btn btn-danger'>Iniciar Sesión</a>";
-                        }else{
-                            echo "<section class='netflix-profile'>
-                                    <img height='25px'width='25px' class='mx-auto d-block' src='{$_SESSION['user']->getUserImage()}'>
-                        
-                                    </section>";
-                        }
-                    ?>
+                        }else{?>
 
+                            <div class="dropdown text-end"> <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true"> <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle"> </a> <ul class="dropdown-menu text-small show" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(0px, 34px);" data-popper-placement="bottom-end"> <a class="dropdown-item" href="/user/<?=$_SESSION['user']->getUuid()?>">Cuenta</a></li> <li><hr class="dropdown-divider"></li> <li><a class="dropdown-item" href="/user/logout">Cerrar Sesion</a></li> </ul> </div>
+                        <?php } ?>
                 </div>
             </div>
         </div>

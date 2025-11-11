@@ -26,9 +26,20 @@ class UserController implements ControllerInterface
 
     function show($id)
     {
-        $usuario=UserModel::getUserById($id);
-        include_once DIRECTORIO_VISTAS_BACKEND."User/mostrarUser.php";
+        if (isset($_SESSION['user']))
+        {
+            //Tenemos un usuario logeado en el sistema
+            $usuario=UserModel::getUserById($id);
+            if ($usuario->isAdmin()){
 
+                //Si el usuario es administrador
+                include_once DIRECTORIO_VISTAS_BACKEND."User/mostrarUser.php";
+            }else{
+                //Si el usuario no es un usuario administrador se le muestra vista de frontend
+                include_once DIRECTORIO_VISTAS_FRONTEND."user/frontShowUser.php";
+
+            }
+        }
     }
 
     function create()
@@ -127,6 +138,8 @@ class UserController implements ControllerInterface
 
     function logout(){
         session_destroy();
+        return header('Location: /');
+
     }
 
 

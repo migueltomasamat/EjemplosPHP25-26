@@ -11,7 +11,7 @@
     <title>Iniciar Sesión</title>
     <link rel="stylesheet" href="<?=DIRECTORIO_CSS_FRONTEND?>styleNew.css">
 </head>
-<body class="cuerpo">
+<body>
 
 <div class="login-top">
     <img src="<?=DIRECTORIO_IMG_FRONTEND?>logo.png" alt="">
