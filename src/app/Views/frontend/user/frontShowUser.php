@@ -57,7 +57,7 @@
                 </select>
             </div>
             <div class="d-grid gap-2 d-md-block">
-                <button type="button" class="btn btn-outline-primary mt-3">Modificar Usuario</button>
+                <button type="button" class="btn btn-outline-primary mt-3" onclick="window.location.replace('http://localhost:8080/')">Modificar Usuario</button>
                 <button type="button" class="btn btn-danger mt-3">Borrar Usuario</button>
             </div>
         </form>
