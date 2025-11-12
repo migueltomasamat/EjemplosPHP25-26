@@ -37,7 +37,6 @@ class UserController implements ControllerInterface
             }else{
                 //Si el usuario no es un usuario administrador se le muestra vista de frontend
                 include_once DIRECTORIO_VISTAS_FRONTEND."user/frontShowUser.php";
-
             }
         }
     }

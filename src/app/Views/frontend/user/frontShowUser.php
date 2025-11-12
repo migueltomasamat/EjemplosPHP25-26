@@ -18,32 +18,47 @@
 </div>
 
 <div class="d-flex justify-content-center align-items-center" style="width: 100vw;">
-    <section class="login-box">
-        <h2 class="text-white">Iniciar Sesión</h2>
-        <form class="mt-4" method="post" action="/user/login">
+    <section class="register-box">
+        <h2 class="text-white">Datos del usuario <?=$_SESSION['user']->getUsername()?></h2>
+        <form class="mt-4">
             <div class="mb-3 bg-white rounded px-2" >
                 <label for="inputUsername" class="form-label small-text" >Nombre de usuario</label>
-                <input type="text" class="form-control border-0 p-0" id="inputUsername" name="username">
-
+                <input type="text" class="form-control border-0 p-0" id="inputUsername" name="username"
+                value="<?=$usuario->getUsername()?>">
             </div>
             <div class="mb-3 bg-white rounded px-2">
                 <label for="inputPassword" class="form-label small-text">Contraseña</label>
-                <input type="password" name="password" class="form-control border-0 p-0" id="inputPassword">
+                <input type="password" name="password" class="form-control border-0 p-0" id="inputPassword"
+                value="<?=$usuario->getPassword()?>">
             </div>
-            <button type="submit" class="btn btn-danger mt-3" style="width: 100%;">Iniciar Sesión</button>
-            <div class="mb-3 mt-3 form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label text-white small-text" for="exampleCheck1">Remember Me</label>
+            <div class="mb-3 bg-white rounded px-2">
+                <label for="inputMail" class="form-label small-text">Correo electrónico</label>
+                <input type="email" name="email" class="form-control border-0 p-0" id="inputMail"
+                value="<?=$usuario->getEmail()?>">
             </div>
-
-            <div class="mt-3 d-flex">
-                <img width="20px" src="<?=DIRECTORIO_IMG_FRONTEND?>fb.png" alt="">
-                <p class="m-0 small-text text-white mx-2">Login with Facebook</p>
+            <div class="mb-3 bg-white rounded px-2">
+                <label for="inputAge" class="form-label small-text">Edad</label>
+                <input type="int" name="edad" class="form-control border-0 p-0" id="inputAge"
+                value="<?=$usuario->getEdad()?>">
             </div>
-            <div class="mt-3 ">
-                <!-- <img width="20px" src="./images/fb.png" alt=""> -->
-                <p class="m-0  text-white"> <span style="color: rgba(212, 212, 212, 0.75);">New to Netflix?</span>  Sign up now.</p>
-                <p class="m-0 small-text text-white  mt-2"> <span style="color: rgba(212, 212, 212, 0.75);">This page is protected by Google reCAPTCHA to ensure you're not a bot. <a href="#"> Learn more.</a> </span> </p>
+            <div class="mb-3 bg-white rounded px-2">
+                <label for="inputType" class="form-label small-text">Tipo de usuario</label>
+                <select class="form-select border-0 p-0 h-100" name="type" id="inputType">
+                    <option selected>Selecciona el tipo de usuario</option>
+                    <option value="Admin"
+                            <?php if($usuario->getType()===\App\Enum\UserType::ADMIN) {echo "selected";}?>
+                    >Administrador</option>
+                    <option value="normal"
+                            <?php if($usuario->getType()===\App\Enum\UserType::NORMAL) {echo "selected";}?>
+                    >Normal</option>
+                    <option value="anuncios"
+                            <?php if($usuario->getType()===\App\Enum\UserType::ANUNCIOS) {echo "selected";}?>
+                    >Anuncios</option>
+                </select>
+            </div>
+            <div class="d-grid gap-2 d-md-block">
+                <button type="button" class="btn btn-outline-primary mt-3">Modificar Usuario</button>
+                <button type="button" class="btn btn-danger mt-3">Borrar Usuario</button>
             </div>
         </form>
     </section>

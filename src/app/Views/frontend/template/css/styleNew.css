@@ -23,6 +23,12 @@
     border-radius: 5px;
     padding: 50px;
 }
+.register-box{
+    background-color: rgba(0, 0, 0, 0.899);
+    width: 90%;
+    border-radius: 5px;
+    padding: 50px;
+}
 
 .small-text{
     font-size: 13px;

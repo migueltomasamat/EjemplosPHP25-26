@@ -38,6 +38,13 @@
       <path value="$PROJECT_DIR$/src/vendor/phroute/phroute" />
       <path value="$PROJECT_DIR$/src/vendor/respect/stringifier" />
       <path value="$PROJECT_DIR$/src/vendor/respect/validation" />
+      <path value="$PROJECT_DIR$/src/vendor/psr/event-dispatcher" />
+      <path value="$PROJECT_DIR$/src/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/src/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/src/vendor/guzzle/stream" />
+      <path value="$PROJECT_DIR$/src/vendor/guzzle/parser" />
+      <path value="$PROJECT_DIR$/src/vendor/guzzle/common" />
+      <path value="$PROJECT_DIR$/src/vendor/guzzle/http" />
     </include_path>
   </component>
   <component name="PhpInterpreters">

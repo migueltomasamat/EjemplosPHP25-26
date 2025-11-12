@@ -40,7 +40,11 @@ $router->filter('admin',function(){
 });
 
 $router->get('/error',function(){
-    $error="No puedes acceder a este apartado";
+    if (isset($_SESSION['error'])){
+        $error = $_SESSION['error'];
+    }else{
+        $error = "Error desconocido";
+    }
     include_once DIRECTORIO_VISTAS."errorVisual.php";
 });
 
@@ -54,7 +58,7 @@ $router->get('/',function(){
 //Rutas de Usuario CRUD
 //Rutas asociadas a las vistas de usuario
 $router->get('/user/{id}/edit',[UserController::class,'edit'],["before"=>'auth']);
-$router->get('/user/create',[UserController::class,'create'],["before"=>'auth']);
+$router->get('/user/create',[UserController::class,'create']);
 $router->get('/login',[UserController::class,'show_login']);
 $router->post('/user/login',[UserController::class,'verify']);
 $router->get('/user/logout',[UserController::class,'logout'],["before"=>'auth']);

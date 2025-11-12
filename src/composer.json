@@ -17,6 +17,7 @@
         "nesbot/carbon": "^3.10",
         "phroute/phroute": "^2.2",
         "respect/validation": "^2.4",
+        "guzzle/http": "v3.9.2",
       "ext-pdo": "*"
     }
 }
