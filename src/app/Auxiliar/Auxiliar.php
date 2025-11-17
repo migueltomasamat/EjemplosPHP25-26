@@ -20,4 +20,12 @@ class Auxiliar
         $client->send($request);
     }
 
+    public static function isAPIRequest():bool{
+
+        $ruta = explode('/',$_SERVER['REQUEST_URI']);
+
+        return array_search('api',$ruta);
+
+    }
+
 }

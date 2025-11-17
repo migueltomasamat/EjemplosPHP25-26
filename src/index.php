@@ -5,16 +5,11 @@ include_once "auxiliar/funciones.php";
 
 session_start();
 
-
-//Directiva para inserta o utilizar la clase RouteCollector
 use App\Controller\MovieController;
 use App\Controller\UserController;
 use Phroute\Phroute\Exception\HttpRouteNotFoundException;
 use Phroute\Phroute\RouteCollector;
 use App\Controller\DirectorController;
-use App\Class\User;
-use App\Enum\UserType;
-use Ramsey\Uuid\Uuid;
 
 
 //instancia una variable de la clase RouteCollector
@@ -33,7 +28,7 @@ $router->filter('auth',function(){
 
 $router->filter('admin',function(){
 
-    if (!isset($_SESSION['user']) && !$_SESSION['user']->isAdmin()){
+    if (isset($_SESSION['user']) && !$_SESSION['user']->isAdmin()){
         header('Location: /error');
         return false;
     }
@@ -54,6 +49,10 @@ $router->get('/',function(){
     return include_once DIRECTORIO_VISTAS_FRONTEND."frontindex.php";
 });
 
+$router->get('/admin',function(){
+    return include_once DIRECTORIO_VISTAS_BACKEND."indexAdmin.php";
+});
+
 
 //Rutas de Usuario CRUD
 //Rutas asociadas a las vistas de usuario
@@ -64,8 +63,8 @@ $router->post('/user/login',[UserController::class,'verify']);
 $router->get('/user/logout',[UserController::class,'logout'],["before"=>'auth']);
 
 //Rutas para la aplicacion web visual
-$router->get('/user',[UserController::class,'index']);
-$router->get('/user/{id}',[UserController::class,'show']);
+$router->get('/user',[UserController::class,'index'],["before"=>'admin']);
+$router->get('/user/{id}',[UserController::class,'show'],["before"=>'auth']);
 $router->post('/user',[UserController::class,'store']);
 $router->put('/user/{id}',[UserController::class,'update']);
 $router->delete('/user/{id}',[UserController::class,'destroy'],["before"=>'admin']);

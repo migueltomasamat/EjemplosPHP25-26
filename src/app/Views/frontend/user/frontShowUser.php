@@ -45,9 +45,6 @@
                 <label for="inputType" class="form-label small-text">Tipo de usuario</label>
                 <select class="form-select border-0 p-0 h-100" name="type" id="inputType">
                     <option selected>Selecciona el tipo de usuario</option>
-                    <option value="Admin"
-                            <?php if($usuario->getType()===\App\Enum\UserType::ADMIN) {echo "selected";}?>
-                    >Administrador</option>
                     <option value="normal"
                             <?php if($usuario->getType()===\App\Enum\UserType::NORMAL) {echo "selected";}?>
                     >Normal</option>

@@ -38,13 +38,14 @@
       <path value="$PROJECT_DIR$/src/vendor/phroute/phroute" />
       <path value="$PROJECT_DIR$/src/vendor/respect/stringifier" />
       <path value="$PROJECT_DIR$/src/vendor/respect/validation" />
-      <path value="$PROJECT_DIR$/src/vendor/psr/event-dispatcher" />
-      <path value="$PROJECT_DIR$/src/vendor/symfony/event-dispatcher" />
-      <path value="$PROJECT_DIR$/src/vendor/symfony/event-dispatcher-contracts" />
-      <path value="$PROJECT_DIR$/src/vendor/guzzle/stream" />
-      <path value="$PROJECT_DIR$/src/vendor/guzzle/parser" />
-      <path value="$PROJECT_DIR$/src/vendor/guzzle/common" />
-      <path value="$PROJECT_DIR$/src/vendor/guzzle/http" />
+      <path value="$PROJECT_DIR$/src/vendor/twbs/bootstrap-icons" />
+      <path value="$PROJECT_DIR$/src/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/src/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/src/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/src/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/src/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/src/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/src/vendor/psr/http-factory" />
     </include_path>
   </component>
   <component name="PhpInterpreters">

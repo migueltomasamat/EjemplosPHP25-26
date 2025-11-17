@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Auxiliar\Auxiliar;
 use App\Class\User;
 use App\Enum\UserType;
 use App\Interface\ControllerInterface;
@@ -15,8 +16,7 @@ class UserController implements ControllerInterface
     function index()
     {
         $usuarios = UserModel::getAllUsers();
-        if($_SERVER['REQUEST_URI']=='api'){
-
+        if (Auxiliar::isAPIRequest()){
             http_response_code(201);
             return json_encode($usuarios);
         }else{
@@ -26,19 +26,19 @@ class UserController implements ControllerInterface
 
     function show($id)
     {
-        if (isset($_SESSION['user']))
-        {
-            //Tenemos un usuario logeado en el sistema
             $usuario=UserModel::getUserById($id);
-            if ($usuario->isAdmin()){
-
-                //Si el usuario es administrador
-                include_once DIRECTORIO_VISTAS_BACKEND."User/mostrarUser.php";
-            }else{
-                //Si el usuario no es un usuario administrador se le muestra vista de frontend
-                include_once DIRECTORIO_VISTAS_FRONTEND."user/frontShowUser.php";
+            if (Auxiliar::isAPIRequest()){
+                http_response_code(200);
+                return json_encode($usuario);
+            }else {
+                if ($usuario->isAdmin()) {
+                    //Si el usuario es administrador
+                    include_once DIRECTORIO_VISTAS_BACKEND . "User/mostrarUser.php";
+                } else {
+                    //Si el usuario no es un usuario administrador se le muestra vista de frontend
+                    include_once DIRECTORIO_VISTAS_FRONTEND . "user/frontShowUser.php";
+                }
             }
-        }
     }
 
     function create()
@@ -49,18 +49,37 @@ class UserController implements ControllerInterface
 
     function store()
     {
-        $resultado = User::validateUserCreation($_POST);
+        $errores = User::validateUserCreation($_POST);
 
-
-        if (is_array($resultado)){
+        if ($errores){
             //Tenemos los datos con errores
-            include_once DIRECTORIO_VISTAS_BACKEND."/User/createUser.php";
+            if (Auxiliar::isAPIRequest()){
+                http_response_code(400);
+                return json_encode([
+                    "error"=>true,
+                    "message"=>"Fallo en la validación de los datos",
+                    "data"=>$errores,
+                    "code"=>400
+                ]);
+            }else {
+                include_once DIRECTORIO_VISTAS_BACKEND . "/User/createUser.php";
+            }
 
         }else{
             //La validación a creado un usuario correcto y tengo que guardarlo
-            $resultado->setPassword(password_hash($resultado->getPassword(),PASSWORD_DEFAULT));
-            UserModel::saveUser($resultado);
-            header('Location: /user');
+            $usuario = User::createFromArray($_POST);
+            UserModel::saveUser($usuario);
+            if (Auxiliar::isAPIRequest()){
+                http_response_code(201);
+                return json_encode([
+                    "error"=>false,
+                    "message"=>"Usuario creado correctamente",
+                    "data"=>$usuario,
+                    "code"=>400
+                ]);
+            }else {
+                header('Location: /user');
+            }
         }
 
     }

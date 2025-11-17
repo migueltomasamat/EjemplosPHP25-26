@@ -120,6 +120,7 @@ class User implements \JsonSerializable
     public function jsonSerialize(): mixed
     {
         return [
+          "uuid"=>$this->uuid,
           "username"=>$this->username,
           "email"=>$this->email,
           "edad"=>$this->edad??null,
@@ -132,6 +133,7 @@ class User implements \JsonSerializable
 
         if(!isset($userData['uuid'])){
             $userData['uuid']=Uuid::uuid4()->toString();
+            $userData['password']=password_hash($userData['password'],PASSWORD_DEFAULT);
         }
 
         $usuario = new User(
@@ -146,7 +148,7 @@ class User implements \JsonSerializable
         return $usuario;
     }
 
-    public static function validateUserCreation(array $userData):User|array{
+    public static function validateUserCreation(array $userData):array|false{
 
         try {
             v::key('username', v::stringType())
@@ -160,7 +162,7 @@ class User implements \JsonSerializable
             return $errores->getMessages();
         }
 
-        return User::createFromArray($userData);
+        return false;
     }
 
     public static function validateUserEdit(array $userData):User|array{

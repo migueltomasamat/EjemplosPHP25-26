@@ -17,7 +17,8 @@
         "nesbot/carbon": "^3.10",
         "phroute/phroute": "^2.2",
         "respect/validation": "^2.4",
-        "guzzle/http": "v3.9.2",
-      "ext-pdo": "*"
+        "guzzlehttp/guzzle": "7.10.0",
+      "ext-pdo": "*",
+        "twbs/bootstrap-icons": "^1.13"
     }
 }
