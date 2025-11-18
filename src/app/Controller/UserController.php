@@ -90,39 +90,70 @@ class UserController implements ControllerInterface
 
         //Llamar a la vista que me muestre los datos del usuario
         include_once DIRECTORIO_VISTAS_BACKEND."User/editUser.php";
-
     }
 
     function update($id)
     {
-
-
         //Leo del fichero input los datos que me han llegado en la petición PUT
         $editData=json_decode(file_get_contents("php://input"),true);
-
-        //var_dump($editData);
 
         //Añado el uuid a los datos que me han llegado en la petición PUT
         $editData['uuid']=$id;
 
         //Valido los datos que me han llegado en la petición PUT
-        $usuario = User::validateUserEdit($editData);
-        //var_dump($usuario);
+        $errores = User::validateUserEdit($editData);
 
-        //TODO guardo el usuario actualizado en la base de datos
-        UserModel::updateUser($usuario);
-
-        //Muesto los datos del usuario o los errores en la petición si los hay
-        //var_dump($usuario);
-
+        if (!$errores){
+            //No hay errores en la validación de usuarios
+            $usuarioAntiguo = UserModel::getUserById($id);
+            $usuarioNuevo = User::editFromArray($usuarioAntiguo,$editData);
+            if (UserModel::updateUser($usuarioNuevo)){
+                http_response_code(401);
+                return json_encode([
+                    "error"=>true,
+                    "message"=>"Error modificando el usuario",
+                    "code"=>401
+                ]);
+            }else{
+                http_response_code(200);
+                return json_encode([
+                    "error"=>false,
+                    "message"=>"Usuario modificado correctamente",
+                    "code"=>200
+                ]);
+            }
+        }else{
+            //Hay errores em la validación de usuario
+            http_response_code(401);
+            return json_encode([
+                "error"=>true,
+                "message"=>"Error de validación de los datos del usuario",
+                "data"=>$errores,
+                "code"=>401
+            ]);
+        }
 
     }
 
     function destroy($id)
     {
-        UserModel::deleteUserById($id);
-        //http_response_code()
-        //Llamamos a la función del modelo que nos permite borrar a un usuario
+        if (UserModel::deleteUserById($id)){
+            //El usuario se ha borrado correctamente
+            http_response_code(200);
+            return json_encode([
+                "error"=>false,
+                "message"=>"El usuario con $id se ha borrado correctamente",
+                "code"=>200
+            ]);
+        }else{
+            //Ha habido algún problema con la base de datos al borrar el usuario
+            http_response_code(401);
+            return json_encode([
+                "error"=>true,
+                "message"=>"El usuario con $id no se ha podido borrar",
+                "code"=>401
+            ]);
+        }
     }
 
 

@@ -148,6 +148,21 @@ class User implements \JsonSerializable
         return $usuario;
     }
 
+    public static function editFromArray(User $usuarioAntiguo,array $userData):?User{
+        $usuarioAntiguo=UserModel::getUserById($userData['uuid']);
+
+        $usuarioAntiguo->setUsername($userData['username']??$usuarioAntiguo->getUsername());
+        $usuarioAntiguo->setPassword(password_hash($userData['password'],PASSWORD_DEFAULT)??$usuarioAntiguo->getPassword());
+        $usuarioAntiguo->setEmail($userData['email']??$usuarioAntiguo->getEmail());
+        $usuarioAntiguo->setEdad($userData['edad']??$usuarioAntiguo->getEdad());
+        $usuarioAntiguo->setType(UserType::stringToUserType($userData['type']??$usuarioAntiguo->getType()->name));
+
+        return $usuarioAntiguo;
+
+
+
+    }
+
     public static function validateUserCreation(array $userData):array|false{
 
         try {
@@ -165,7 +180,7 @@ class User implements \JsonSerializable
         return false;
     }
 
-    public static function validateUserEdit(array $userData):User|array{
+    public static function validateUserEdit(array $userData):array|false{
         try {
             v::key('uuid',v::uuid(),true)
                 ->key('username', v::stringType(),false)
@@ -177,15 +192,8 @@ class User implements \JsonSerializable
             return $errores->getMessages();
         }
 
-        $usuarioAntiguo=UserModel::getUserById($userData['uuid']);
+        return false;
 
-        $usuarioAntiguo->setUsername($userData['username']??$usuarioAntiguo->getUsername());
-        $usuarioAntiguo->setPassword(password_hash($userData['password'],PASSWORD_DEFAULT)??$usuarioAntiguo->getPassword());
-        $usuarioAntiguo->setEmail($userData['email']??$usuarioAntiguo->getEmail());
-        $usuarioAntiguo->setEdad($userData['edad']??$usuarioAntiguo->getEdad());
-        $usuarioAntiguo->setType(UserType::stringToUserType($userData['type']??$usuarioAntiguo->getType()->name));
-
-        return $usuarioAntiguo;
 
     }
 }
